@@ -1,0 +1,11 @@
+django==2.0.6
+pymysql
+envparse==0.2.0
+#gevent
+#gunicorn
+djangorestframework
+django-cors-headers
+requests
+pillow
+yandex_checkout
+

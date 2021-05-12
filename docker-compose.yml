@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  nginx:
+    restart: always
+    image: nginx:latest
+    container_name: NGINXDOCKERNAME5
+    ports:
+      - "80:80"
+      - "443:443"
+
+    volumes:
+      - .:/srv/app
+      - ./nginx:/etc/nginx/conf.d
+      - /static:/static  <--- HERE
+    depends_on:
+      - web
+  web:
+    restart: always
+    build: .
+    container_name: Zapis
+    command:  python manage.py runserver 0.0.0.0:8002
+#    bash -c "gunicorn ZapisBackend.wsgi --workers=5 -b 0.0.0.0:8002"
+
+    volumes:
+      - .:/srv/app
+      - /static:/static    <---- HERE
+    ports:
+      - "8002:8002"
+    expose:
+      - "8002"
